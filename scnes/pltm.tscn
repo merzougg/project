@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyjj1fhsd0d64"]
+
+[ext_resource type="Script" uid="uid://dtm56g7avs5xw" path="res://code/pltm.gd" id="1_ff12l"]
+[ext_resource type="Texture2D" uid="uid://b120n7qek1weq" path="res://sprites/brackeys_platformer_assets/sprites/platforms.png" id="1_p8o7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g3hr"]
+size = Vector2(30, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8o7y"]
+atlas = ExtResource("1_p8o7y")
+region = Rect2(16, 0, 32, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ff12l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8o7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8o7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8o7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8o7y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="pltm" type="Node2D"]
+script = ExtResource("1_ff12l")
+
+[node name="riht" type="RayCast2D" parent="."]
+position = Vector2(12, 0)
+target_position = Vector2(8, 0)
+
+[node name="left" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(-7, 0)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_floor_layers = 4294967041
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("RectangleShape2D_3g3hr")
+one_way_collision = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.9375, 1)
+sprite_frames = SubResource("SpriteFrames_ff12l")
+autoplay = "default"
+frame = 1
+frame_progress = 0.24664193
