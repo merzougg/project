@@ -11,8 +11,7 @@ var speed = 60
 func _process(delta: float) -> void:
 	if riht.is_colliding():
 		direction = -1
-		animated_sprite_2d.flip_h
 	if left.is_colliding():
 		direction = 1
 	animated_sprite_2d.flip_h = direction  <  0
-	position.x += speed  *delta*direction
+	position.x += speed  * delta * direction

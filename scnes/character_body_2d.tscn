@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cprkyjaj2fmo4"]
+[gd_scene load_steps=25 format=3 uid="uid://cprkyjaj2fmo4"]
 
 [ext_resource type="Script" uid="uid://vpo4kntwspxi" path="res://code/character_body_2d.gd" id="1_l2u6p"]
 [ext_resource type="Texture2D" uid="uid://cjl3hrqdygcx8" path="res://sprites/brackeys_platformer_assets/sprites/knight.png" id="2_lq08l"]
@@ -21,6 +21,22 @@ region = Rect2(64, 192, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0uhob"]
 atlas = ExtResource("2_lq08l")
 region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkxjj"]
+atlas = ExtResource("2_lq08l")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5t4u"]
+atlas = ExtResource("2_lq08l")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtclu"]
+atlas = ExtResource("2_lq08l")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1jik"]
+atlas = ExtResource("2_lq08l")
+region = Rect2(96, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4otnc"]
 atlas = ExtResource("2_lq08l")
@@ -91,6 +107,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vkxjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5t4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtclu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1jik")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4otnc")
 }, {
 "duration": 1.0,
@@ -132,7 +165,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_r48r0")
 }],
 "loop": true,
-"name": &"move left",
+"name": &"move",
 "speed": 10.0
 }]
 
@@ -149,4 +182,4 @@ shape = SubResource("CircleShape2D_r48r0")
 z_index = 5
 position = Vector2(-1, -13)
 sprite_frames = SubResource("SpriteFrames_13xdq")
-animation = &"dam"
+animation = &"move"

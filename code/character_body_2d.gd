@@ -1,17 +1,26 @@
 extends CharacterBody2D
 
 var pv = 60
-const SPEED = 350.0
+var SPEED = 350.0
 const JUMP_VELOCITY = -300.0
 var taking_damage = false
+var death = false
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 func respawn():
-	self.global_position = Vector2(0,0)
+	pv = 60
+	death = false
+	taking_damage = false
+	self.global_position = Vector2(0, 0)
+	animated_sprite_2d.play("default")
 
 func take_damage(amount: int) -> void:
+	if death:
+		return
+	
 	pv -= amount
-	print("Player HP:", pv)
+	
 	if pv <= 0:
 		die()
 	else:
@@ -19,17 +28,22 @@ func take_damage(amount: int) -> void:
 		animated_sprite_2d.play("dam")
 
 func die():
-	pv = 60
-	respawn()
+	death = true
+	taking_damage = false
+	animated_sprite_2d.play("death")
 
 func _physics_process(delta: float) -> void:
-	# Handle damage animation
-	if taking_damage:
-		if not animated_sprite_2d.is_playing():
-			taking_damage = false
-			animated_sprite_2d.play("default")  # Return to idle
+	if death:
+		if Input.is_action_just_pressed("ui_up"):
+			respawn()
+		return 
 
-	# Add gravity
+	# Handle damage animation reset
+	if taking_damage and not animated_sprite_2d.is_playing():
+		taking_damage = false
+		animated_sprite_2d.play("default")
+
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -41,8 +55,10 @@ func _physics_process(delta: float) -> void:
 	if not taking_damage:
 		var direction := Input.get_axis("ui_left", "ui_right")
 		velocity.x = direction * SPEED
-		if direction:
-			animated_sprite_2d.play("move left")
+		
+
+		if direction != 0:
+			animated_sprite_2d.play("move")
 			animated_sprite_2d.flip_h = direction < 0
 		else:
 			animated_sprite_2d.play("default")
