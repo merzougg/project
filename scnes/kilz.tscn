@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://brros2ue6m5ia"]
-
-[ext_resource type="Script" uid="uid://b01jhaqsmoe6u" path="res://code/kilz.gd" id="1_j1lmg"]
-
-[node name="kilz" type="Area2D"]
-script = ExtResource("1_j1lmg")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
